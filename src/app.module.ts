@@ -14,6 +14,8 @@ import { PermissionModule } from './modules/permission/permission.module';
 import { RoleModule } from './modules/role/role.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ProductModule } from './modules/product/product.module';
+import { CategoryModule } from './modules/category/category.module';
+import { UploadModule } from './modules/upload/upload.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { ProductModule } from './modules/product/product.module';
     RoleModule,
     AuthModule,
     ProductModule,
+    CategoryModule,
+    UploadModule,
 
     SharedModule,
   ],
