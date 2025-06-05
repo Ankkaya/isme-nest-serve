@@ -133,15 +133,19 @@ export class CategoryService {
    * 获取分类树形结构
    */
   async getTree(query: CategoryTreeDto) {
-    const { maxLevel = 3, status, showInNav, includeProductCount = false } = query;
+    const { maxLevel = 3, status, showInNav, includeProductCount = false, name } = query;
 
     const queryBuilder = this.categoryRepository.createQueryBuilder('category');
+
+    if (name) {
+      queryBuilder.andWhere('category.name LIKE :name', { name: `%${name}%` });
+    }
 
     // 只获取指定层级内的分类
     queryBuilder.andWhere('category.level <= :maxLevel', { maxLevel });
 
     // 状态筛选
-    if (status) {
+    if (status === 0 || status === 1) {
       queryBuilder.andWhere('category.status = :status', { status });
     }
 

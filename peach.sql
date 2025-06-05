@@ -62,6 +62,14 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='商品分类表';
 
 -- ----------------------------
+-- Records of permission
+-- ----------------------------
+INSERT INTO `isme`.`permission` (`id`, `name`, `code`, `type`, `parentId`, `path`, `redirect`, `icon`, `component`, `layout`, `keepAlive`, `method`, `description`, `show`, `enable`, `order`) VALUES (24, '商品属性', 'ProductAttribute', 'MENU', 21, '/product/attribute', NULL, NULL, '/src/views/peach/product/attribute/index.vue', '', NULL, NULL, NULL, 1, 1, 3);
+INSERT INTO `isme`.`permission` (`id`, `name`, `code`, `type`, `parentId`, `path`, `redirect`, `icon`, `component`, `layout`, `keepAlive`, `method`, `description`, `show`, `enable`, `order`) VALUES (25, '分配属性值', 'AttributeValue', 'MENU', 24, '/product/attribute/value', NULL, NULL, '/src/views/peach/product/attribute/attribute-value.vue', '', NULL, NULL, NULL, 0, 1, 0);
+INSERT INTO `isme`.`permission` (`id`, `name`, `code`, `type`, `parentId`, `path`, `redirect`, `icon`, `component`, `layout`, `keepAlive`, `method`, `description`, `show`, `enable`, `order`) VALUES (26, '商品规格', 'ProductSpecification', 'MENU', 21, '/product/specification', NULL, NULL, '/src/views/peach/product/specification/index.vue', '', NULL, NULL, NULL, 1, 1, 4);
+INSERT INTO `isme`.`permission` (`id`, `name`, `code`, `type`, `parentId`, `path`, `redirect`, `icon`, `component`, `layout`, `keepAlive`, `method`, `description`, `show`, `enable`, `order`) VALUES (27, '分配规格值', 'SpecificationValue', 'MENU', 26, '/product/specification/value', NULL, NULL, '/src/views/peach/product/specification/specification-value.vue', '', NULL, NULL, NULL, 0, 1, 0);
+
+-- ----------------------------
 -- Records of categories (示例数据)
 -- ----------------------------
 INSERT INTO `categories` VALUES 

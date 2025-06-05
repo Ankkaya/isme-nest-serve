@@ -16,6 +16,8 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ProductModule } from './modules/product/product.module';
 import { CategoryModule } from './modules/category/category.module';
 import { UploadModule } from './modules/upload/upload.module';
+import { AttributeModule } from './modules/attribute/attribute.module';
+import { AttributeValueModule } from './modules/attribute-value/attribute-value.module';
 
 @Module({
   imports: [
@@ -32,6 +34,8 @@ import { UploadModule } from './modules/upload/upload.module';
     ProductModule,
     CategoryModule,
     UploadModule,
+    AttributeModule,
+    AttributeValueModule,
 
     SharedModule,
   ],

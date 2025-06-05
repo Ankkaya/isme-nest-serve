@@ -179,6 +179,10 @@ export class BatchUpdateStatusDto {
 
 export class CategoryTreeDto {
   @IsOptional()
+  @IsString({ message: '分类名称必须是字符串' })
+  name?: string;
+
+  @IsOptional()
   @Type(() => Number)
   @IsInt({ message: '最大层级必须是整数' })
   @Min(1, { message: '最大层级不能小于1' })
