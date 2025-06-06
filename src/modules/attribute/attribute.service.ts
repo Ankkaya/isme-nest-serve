@@ -181,4 +181,17 @@ export class AttributeService {
       relations: ['attributeValues']
     });
   }
+
+  /**
+   * 获取全部属性列表（不分页）
+   */
+  async findAllList(status?: number): Promise<Attribute[]> {
+    const whereCondition = status !== undefined ? { status } : {};
+    
+    return await this.attributeRepository.find({
+      where: whereCondition,
+      order: { sort: 'DESC', createTime: 'DESC' },
+      relations: ['attributeValues']
+    });
+  }
 } 

@@ -66,6 +66,17 @@ export class AttributeController {
   }
 
   /**
+   * 获取全部属性列表（不分页）
+   */
+  @Get('list')
+  async findAllList(@Query('status') status?: string) {
+    const statusNum = status !== undefined ? parseInt(status, 10) : undefined;
+    const attributes = await this.attributeService.findAllList(statusNum);
+    return  attributes
+    
+  }
+
+  /**
    * 查询属性详情
    */
   @Get(':id')

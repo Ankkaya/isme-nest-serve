@@ -59,13 +59,23 @@
 
 返回所有状态为启用的属性，用于下拉选择等场景。
 
-### 4. 获取属性详情
+### 4. 获取全部属性列表
+
+**GET** `/attributes/list?status=1`
+
+返回所有属性的完整列表（不分页），包括启用和禁用的属性，用于需要获取完整属性数据的场景。
+
+**查询参数：**
+
+- `status`: 属性状态（可选，1=启用，0=禁用。不传则返回所有状态的属性）
+
+### 5. 获取属性详情
 
 **GET** `/attributes/:id`
 
 返回指定属性的详细信息，包括关联的属性值。
 
-### 5. 更新属性信息
+### 6. 更新属性信息
 
 **PATCH** `/attributes/:id`
 
@@ -77,13 +87,13 @@
 }
 ```
 
-### 6. 删除属性
+### 7. 删除属性
 
 **DELETE** `/attributes/:id`
 
 **注意：** 只能删除没有关联属性值的属性。
 
-### 7. 批量删除属性
+### 8. 批量删除属性
 
 **DELETE** `/attributes/batch/delete`
 
@@ -95,7 +105,7 @@
 
 **注意：** 所有指定的属性都必须没有关联的属性值才能删除。
 
-### 8. 批量更新属性状态
+### 9. 批量更新属性状态
 
 **PATCH** `/attributes/batch/status`
 
@@ -123,6 +133,15 @@
 ```javascript
 // 获取所有启用的属性
 const enabledAttributes = await fetch('/api/attributes/enabled');
+
+// 获取全部属性列表（不分页，包含所有状态）
+const allAttributes = await fetch('/api/attributes/list');
+
+// 获取全部启用的属性列表（不分页）
+const allEnabledAttributes = await fetch('/api/attributes/list?status=1');
+
+// 获取全部禁用的属性列表（不分页）
+const allDisabledAttributes = await fetch('/api/attributes/list?status=0');
 
 // 分页查询属性
 const attributeList = await fetch('/api/attributes?page=1&limit=10&status=1');
