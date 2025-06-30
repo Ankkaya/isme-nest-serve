@@ -43,7 +43,7 @@ export class AttributeService {
    * 查询属性列表（分页）
    */
   async findAll(queryAttributeDto: QueryAttributeDto) {
-    const { name, status, page = 1, limit = 10 } = queryAttributeDto;
+    const { name, status, valueStatus, page = 1, limit = 10 } = queryAttributeDto;
     
     const queryBuilder = this.attributeRepository.createQueryBuilder('attribute');
     
@@ -56,6 +56,17 @@ export class AttributeService {
       queryBuilder.andWhere('attribute.status = :status', { status });
     }
 
+    // 关联查询属性值
+    if (valueStatus !== undefined) {
+      // 如果指定了属性值状态，只关联该状态的属性值
+      queryBuilder.leftJoinAndSelect('attribute.attributeValues', 'attributeValue', 'attributeValue.status = :valueStatus');
+      // 筛选包含该状态属性值的属性
+      queryBuilder.andWhere('EXISTS (SELECT 1 FROM attribute_values av WHERE av.attributeId = attribute.id AND av.status = :valueStatus)', { valueStatus });
+    } else {
+      // 如果没有指定属性值状态，关联所有属性值
+      queryBuilder.leftJoinAndSelect('attribute.attributeValues', 'attributeValue');
+    }
+
     // 分页
     const skip = (page - 1) * limit;
     queryBuilder.skip(skip).take(limit);
@@ -63,9 +74,6 @@ export class AttributeService {
     // 排序
     queryBuilder.orderBy('attribute.sort', 'ASC');
     queryBuilder.addOrderBy('attribute.createTime', 'DESC');
-
-    // 关联查询属性值
-    queryBuilder.leftJoinAndSelect('attribute.attributeValues', 'attributeValue');
 
     const [data, total] = await queryBuilder.getManyAndCount();
 

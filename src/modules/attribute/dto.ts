@@ -56,6 +56,11 @@ export class QueryAttributeDto {
   @Transform(({ value }) => parseInt(value))
   status?: number;
 
+  @IsNumber({}, { message: '属性值状态必须是数字' })
+  @IsOptional()
+  @Transform(({ value }) => parseInt(value))
+  valueStatus?: number;
+
   @IsNumber({}, { message: '页码必须是数字' })
   @Min(1, { message: '页码最小值为1' })
   @IsOptional()
